@@ -30,11 +30,13 @@ public class PageOneRunner implements CommandLineRunner {
     private LoginController loginController;
     private ResultController resultController;
     private CaptureResultController captureResultController;
+    private RankingTableController rankingTableController;
     private Base64CredentialEncoder base64CredentialEncoder;
 
     @Autowired
-    public PageOneRunner(CaptureResultController captureResultController, Base64CredentialEncoder base64CredentialEncoder) {
+    public PageOneRunner(CaptureResultController captureResultController, RankingTableController rankingTableController, Base64CredentialEncoder base64CredentialEncoder) {
         this.captureResultController = captureResultController;
+        this.rankingTableController = rankingTableController;
         this.base64CredentialEncoder = base64CredentialEncoder;
     }
 
@@ -68,8 +70,7 @@ public class PageOneRunner implements CommandLineRunner {
     }
 
     private void viewRankingTable() {
-        RankingTableController rankingTable = new RankingTableController();
-        rankingTable.viewRankingTable(submitResultModel);
+        rankingTableController.viewRankingTable(submitResultModel);
     }
 
     private void submitResult(SubmitResultModel submitResultModel) {

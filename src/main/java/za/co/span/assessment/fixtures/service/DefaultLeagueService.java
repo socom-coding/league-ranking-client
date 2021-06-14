@@ -6,5 +6,5 @@ public interface DefaultLeagueService {
 
     void submitResult(SubmitResultModel submitResultModel);
 
-    void viewRankingTable();
+    void viewRankingTable(SubmitResultModel submitResultModel);
 }

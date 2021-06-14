@@ -27,12 +27,17 @@ public class DefaultLeagueServiceImpl implements DefaultLeagueService {
 
     @Override
     public void submitResult(SubmitResultModel submitResultModel) {
-        defaultFixturesControllerApi.getApiClient().addDefaultHeader("Authorization", "Basic " + submitResultModel.getLoginModel().getBasicAuth());
+        setAuthorization(submitResultModel);
         defaultFixturesControllerApi.captureResultUsingPOST(submitResultModel.getResultModel().getResult());
     }
 
     @Override
-    public void viewRankingTable() {
+    public void viewRankingTable(SubmitResultModel submitResultModel) {
+        setAuthorization(submitResultModel);
+        defaultFixturesControllerApi.rankingUsingGET();
+    }
 
+    private void setAuthorization(SubmitResultModel submitResultModel){
+        defaultFixturesControllerApi.getApiClient().addDefaultHeader("Authorization", "Basic " + submitResultModel.getLoginModel().getBasicAuth());
     }
 }
