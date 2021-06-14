@@ -3,6 +3,7 @@ package za.co.span.assessment.fixtures.service.impl;
 import leaguerankingservice.consume.api.DefaultFixturesControllerApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import za.co.span.assessment.fixtures.model.SubmitResultModel;
 import za.co.span.assessment.fixtures.service.DefaultLeagueService;
@@ -15,7 +16,8 @@ public class DefaultLeagueServiceImpl implements DefaultLeagueService {
 
     private DefaultFixturesControllerApi defaultFixturesControllerApi;
 
-    private String basePath = "http://localhost:9009/api";
+    @Value("${league.ranking.service.basepath}")
+    private String basePath;
 
     @PostConstruct
     private void setupApiClient() {
