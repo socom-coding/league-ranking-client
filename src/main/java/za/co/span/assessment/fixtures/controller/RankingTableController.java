@@ -6,10 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.co.span.assessment.StartLeagueRankingClientApplication;
-import za.co.span.assessment.fixtures.model.LoginModel;
 import za.co.span.assessment.fixtures.model.SubmitResultModel;
 import za.co.span.assessment.fixtures.service.DefaultLeagueService;
-import za.co.span.assessment.security.Base64CredentialEncoder;
+import za.co.span.assessment.fixtures.view.LoginView;
 
 import java.util.List;
 
@@ -19,15 +18,13 @@ public class RankingTableController {
     private static Logger LOG = LoggerFactory.getLogger(StartLeagueRankingClientApplication.class);
 
     private SubmitResultModel submitResultModel;
-    private LoginController loginController;
     private DefaultLeagueService defaultLeagueService;
-    private Base64CredentialEncoder base64CredentialEncoder;
-    private LoginModel loginModel;
+    private LoginView loginView;
 
     @Autowired
-    public RankingTableController(DefaultLeagueService defaultLeagueService, Base64CredentialEncoder base64CredentialEncoder) {
+    public RankingTableController(DefaultLeagueService defaultLeagueService, LoginView loginView) {
         this.defaultLeagueService = defaultLeagueService;
-        this.base64CredentialEncoder = base64CredentialEncoder;
+        this.loginView = loginView;
     }
 
     public void viewRanking() {
@@ -44,10 +41,7 @@ public class RankingTableController {
     }
 
     private void getLoginDetails(SubmitResultModel submitResultModel) {
-        loginController = new LoginController();
-        loginModel = loginController.setLogin();
-        base64CredentialEncoder.encodeUsernamePassword(loginModel);
-        submitResultModel.setLoginModel(loginModel);
+        submitResultModel.setLoginModel(loginView.setLogin());
     }
 
     private List<LeagueRanking> getRankingTable(SubmitResultModel submitResultModel) {

@@ -5,11 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.co.span.assessment.StartLeagueRankingClientApplication;
-import za.co.span.assessment.fixtures.model.LoginModel;
 import za.co.span.assessment.fixtures.model.ResultModel;
 import za.co.span.assessment.fixtures.model.SubmitResultModel;
 import za.co.span.assessment.fixtures.service.DefaultLeagueService;
-import za.co.span.assessment.security.Base64CredentialEncoder;
+import za.co.span.assessment.fixtures.view.LoginView;
 
 @Component
 public class CaptureResultController {
@@ -19,15 +18,13 @@ public class CaptureResultController {
     private SubmitResultModel submitResultModel;
     private ResultController resultController;
     private ResultModel resultModel;
-    private LoginController loginController;
-    private LoginModel loginModel;
-    private Base64CredentialEncoder base64CredentialEncoder;
     private DefaultLeagueService defaultLeagueService;
+    private LoginView loginView;
 
     @Autowired
-    public CaptureResultController(Base64CredentialEncoder base64CredentialEncoder, DefaultLeagueService defaultLeagueService) {
-        this.base64CredentialEncoder = base64CredentialEncoder;
+    public CaptureResultController(DefaultLeagueService defaultLeagueService, LoginView loginView) {
         this.defaultLeagueService = defaultLeagueService;
+        this.loginView = loginView;
     }
 
     public void captureResults() {
@@ -48,9 +45,6 @@ public class CaptureResultController {
     }
 
     private void getLoginDetails(SubmitResultModel submitResultModel) {
-        loginController = new LoginController();
-        loginModel = loginController.setLogin();
-        base64CredentialEncoder.encodeUsernamePassword(loginModel);
-        submitResultModel.setLoginModel(loginModel);
+        submitResultModel.setLoginModel(loginView.setLogin());
     }
 }

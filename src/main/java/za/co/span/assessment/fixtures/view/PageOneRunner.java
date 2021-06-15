@@ -21,13 +21,11 @@ public class PageOneRunner implements CommandLineRunner {
 
     @Autowired
     public PageOneRunner(OptionController optionController) {
-
         this.optionController = optionController;
     }
 
     @Override
     public void run(String... args) throws Exception {
-
         while (!endProgramme) {
             OptionsView.getOptions();
             endProgramme = optionController.processOption();
