@@ -1,26 +1,29 @@
 package za.co.span.assessment.fixtures.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import za.co.span.assessment.security.Base64CredentialEncoder;
+import za.co.span.assessment.StartLeagueRankingClientApplication;
+import za.co.span.assessment.fixtures.model.SubmitResultModel;
 
 import java.util.Scanner;
 
 @Component
 public class OptionController {
 
+    private static Logger LOG = LoggerFactory.getLogger(StartLeagueRankingClientApplication.class);
+
     private CaptureResultController captureResultController;
     private RankingTableController rankingTableController;
-    private Base64CredentialEncoder base64CredentialEncoder;
 
     @Autowired
-    public OptionController(CaptureResultController captureResultController, RankingTableController rankingTableController, Base64CredentialEncoder base64CredentialEncoder) {
+    public OptionController(CaptureResultController captureResultController, RankingTableController rankingTableController) {
         this.captureResultController = captureResultController;
         this.rankingTableController = rankingTableController;
-        this.base64CredentialEncoder = base64CredentialEncoder;
     }
 
-    public Boolean processOption() {
+    public Boolean processOption(SubmitResultModel submitResultModel) {
         String option = null;
 
         Scanner scanner = new Scanner(System.in);
@@ -31,10 +34,10 @@ public class OptionController {
 
         switch (option) {
             case "1":
-                captureResultController.captureResults();
+                captureResultController.captureResults(submitResultModel);
                 break;
             case "2":
-                rankingTableController.viewRanking();
+                rankingTableController.viewRanking(submitResultModel);
                 break;
             case "3":
                 return Boolean.TRUE;

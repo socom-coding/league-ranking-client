@@ -15,7 +15,6 @@ public class CaptureResultController {
 
     private static Logger LOG = LoggerFactory.getLogger(StartLeagueRankingClientApplication.class);
 
-    private SubmitResultModel submitResultModel;
     private ResultController resultController;
     private ResultModel resultModel;
     private DefaultLeagueService defaultLeagueService;
@@ -27,9 +26,10 @@ public class CaptureResultController {
         this.loginView = loginView;
     }
 
-    public void captureResults() {
-        submitResultModel = new SubmitResultModel();
-        getLoginDetails(submitResultModel);
+    public void captureResults(SubmitResultModel submitResultModel) {
+        if (submitResultModel.getLoginModel().getBasicAuth().isEmpty()) {
+            getLoginDetails(submitResultModel);
+        }
         getResultDetails(submitResultModel);
         captureResult(submitResultModel);
     }

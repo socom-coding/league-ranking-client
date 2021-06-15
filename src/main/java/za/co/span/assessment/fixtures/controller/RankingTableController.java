@@ -17,7 +17,6 @@ public class RankingTableController {
 
     private static Logger LOG = LoggerFactory.getLogger(StartLeagueRankingClientApplication.class);
 
-    private SubmitResultModel submitResultModel;
     private DefaultLeagueService defaultLeagueService;
     private LoginView loginView;
 
@@ -27,13 +26,14 @@ public class RankingTableController {
         this.loginView = loginView;
     }
 
-    public void viewRanking() {
-        submitResultModel = new SubmitResultModel();
-        getLoginDetails(submitResultModel);
-        displayRankingTable();
+    public void viewRanking(SubmitResultModel submitResultModel) {
+        if (submitResultModel.isEmpty()) {
+            getLoginDetails(submitResultModel);
+        }
+        displayRankingTable(submitResultModel);
     }
 
-    private void displayRankingTable() {
+    private void displayRankingTable(SubmitResultModel submitResultModel) {
         List<LeagueRanking> leagueRankings = getRankingTable(submitResultModel);
         for (LeagueRanking leagueRanking : leagueRankings) {
             System.out.println(leagueRanking.getPosition() + ". " + leagueRanking.getName() + ", " + leagueRanking.getPoints() + " pts");

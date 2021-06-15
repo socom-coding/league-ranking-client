@@ -10,4 +10,5 @@ public class LoginModel {
     public String getBasicAuth() {
         return basicAuth;
     }
+
 }
