@@ -1,6 +1,7 @@
 package za.co.span.assessment.fixtures.service.impl;
 
 import leaguerankingservice.consume.api.DefaultFixturesControllerApi;
+import leaguerankingservice.consume.model.LeagueRanking;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +10,7 @@ import za.co.span.assessment.fixtures.model.SubmitResultModel;
 import za.co.span.assessment.fixtures.service.DefaultLeagueService;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @Service
 public class DefaultLeagueServiceImpl implements DefaultLeagueService {
@@ -32,9 +34,9 @@ public class DefaultLeagueServiceImpl implements DefaultLeagueService {
     }
 
     @Override
-    public void viewRankingTable(SubmitResultModel submitResultModel) {
+    public List<LeagueRanking> viewRankingTable(SubmitResultModel submitResultModel) {
         setAuthorization(submitResultModel);
-        defaultFixturesControllerApi.rankingUsingGET();
+        return defaultFixturesControllerApi.rankingUsingGET();
     }
 
     private void setAuthorization(SubmitResultModel submitResultModel){
