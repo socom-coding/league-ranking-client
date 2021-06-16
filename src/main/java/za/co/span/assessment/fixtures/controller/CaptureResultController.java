@@ -27,7 +27,7 @@ public class CaptureResultController {
     }
 
     public void captureResults(SubmitResultModel submitResultModel) {
-        if (submitResultModel.getLoginModel().getBasicAuth().isEmpty()) {
+        if (submitResultModel.isEmpty()) {
             getLoginDetails(submitResultModel);
         }
         getResultDetails(submitResultModel);
