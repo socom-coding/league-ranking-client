@@ -38,7 +38,6 @@ public class DefaultLeagueServiceImpl implements DefaultLeagueService {
     @Override
     public List<Team> viewRankingTable(LoginModel loginModel) {
         setAuthorization(loginModel);
-
         List<Team> teamList = TeamMapper.INSTANCE.mapToPojo(defaultFixturesControllerApi.rankingUsingGET());
         return teamList;
     }

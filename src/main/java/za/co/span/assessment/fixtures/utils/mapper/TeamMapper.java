@@ -11,11 +11,7 @@ import java.util.List;
 public interface TeamMapper {
     TeamMapper INSTANCE = Mappers.getMapper(TeamMapper.class);
 
-    TeamDTO teaToTeamDTO(Team team);
-
     Team teamDTOToTeam(TeamDTO teamDTO);
-
-    List<TeamDTO> mapToDTO(List<Team> teamList);
 
     List<Team> mapToPojo(List<TeamDTO> teamDTOList);
 
