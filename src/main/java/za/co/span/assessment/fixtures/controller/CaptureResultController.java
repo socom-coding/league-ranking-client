@@ -33,7 +33,6 @@ public class CaptureResultController {
         if (loginModel.isEmpty()) {
             loginModel.setBasicAuth(getLoginDetails());
         }
-//        submitResultModel.setLoginModel(loginModel);
         submitResultModel.setResultModel(getResultDetails());
         captureResult(loginModel, submitResultModel);
     }
