@@ -33,13 +33,13 @@ public class CaptureResultController {
         if (loginModel.isEmpty()) {
             loginModel.setBasicAuth(getLoginDetails());
         }
-        submitResultModel.setLoginModel(loginModel);
+//        submitResultModel.setLoginModel(loginModel);
         submitResultModel.setResultModel(getResultDetails());
-        captureResult(submitResultModel);
+        captureResult(loginModel, submitResultModel);
     }
 
-    private void captureResult(SubmitResultModel submitResultModel) {
-        defaultLeagueService.submitResult(submitResultModel);
+    private void captureResult(LoginModel loginModel, SubmitResultModel submitResultModel) {
+        defaultLeagueService.submitResult(loginModel, submitResultModel);
     }
 
     private ResultModel getResultDetails() {

@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
 import za.co.span.assessment.fixtures.pojo.LoginModel;
 import za.co.span.assessment.fixtures.pojo.SubmitResultModel;
 import za.co.span.assessment.fixtures.pojo.Team;
@@ -12,6 +13,7 @@ import za.co.span.assessment.fixtures.service.DefaultLeagueService;
 import za.co.span.assessment.fixtures.utils.mapper.TeamMapper;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,15 +32,35 @@ public class DefaultLeagueServiceImpl implements DefaultLeagueService {
     }
 
     @Override
-    public void submitResult(SubmitResultModel submitResultModel) {
-        setAuthorization(submitResultModel.getLoginModel());
-        defaultFixturesControllerApi.captureResultUsingPOST(submitResultModel.getResultModel().getResult());
+    public void submitResult(LoginModel loginModel, SubmitResultModel submitResultModel) {
+        setAuthorization(loginModel);
+
+        try {
+            defaultFixturesControllerApi.captureResultUsingPOST(submitResultModel.getResultModel().getResult());
+        } catch (HttpStatusCodeException httpStatusCodeException) {
+            log.error("Failed to execute GET on {}, due to {}", basePath + "/fixtures/result/{result}", httpStatusCodeException.getStatusCode());
+            if(httpStatusCodeException.getRawStatusCode() == 401 || httpStatusCodeException.getRawStatusCode() == 403){
+                loginModel.setBasicAuth(null);
+            }
+        } catch (Exception exception) {
+            log.error("Failed to execute GET on {}, due to {}", basePath + "/fixtures/result/{result}", exception.getCause().getMessage());
+        }
     }
 
     @Override
     public List<Team> viewRankingTable(LoginModel loginModel) {
         setAuthorization(loginModel);
-        List<Team> teamList = TeamMapper.INSTANCE.mapToPojo(defaultFixturesControllerApi.rankingUsingGET());
+        List<Team> teamList = new ArrayList<>();
+        try {
+            teamList = TeamMapper.INSTANCE.mapToPojo(defaultFixturesControllerApi.rankingUsingGET());
+        } catch (HttpStatusCodeException httpStatusCodeException) {
+            log.error("Failed to execute GET on {}, due to {}", basePath + "/fixtures/ranking", httpStatusCodeException.getStatusCode());
+            if(httpStatusCodeException.getRawStatusCode() == 401 || httpStatusCodeException.getRawStatusCode() == 403){
+                loginModel.setBasicAuth(null);
+            }
+        } catch (Exception exception) {
+            log.error("Failed to execute GET on {}, due to {}", basePath + "/fixtures/ranking", exception.getCause().getMessage());
+        }
         return teamList;
     }
 

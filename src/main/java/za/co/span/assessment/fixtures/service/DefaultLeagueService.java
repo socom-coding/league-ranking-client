@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface DefaultLeagueService {
 
-    void submitResult(SubmitResultModel submitResultModel);
+    void submitResult(LoginModel loginModel, SubmitResultModel submitResultModel);
 
     List<Team> viewRankingTable(LoginModel loginModel);
 }
