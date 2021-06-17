@@ -1,5 +1,8 @@
 package za.co.span.assessment.fixtures.pojo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ResultModel {
     private String result;
 

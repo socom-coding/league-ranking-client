@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import za.co.span.assessment.StartLeagueRankingClientApplication;
 import za.co.span.assessment.fixtures.pojo.LoginModel;
 import za.co.span.assessment.fixtures.pojo.ResultModel;
-import za.co.span.assessment.fixtures.pojo.SubmitResultModel;
 import za.co.span.assessment.fixtures.service.DefaultLeagueService;
 import za.co.span.assessment.fixtures.view.LoginView;
 
@@ -19,13 +18,13 @@ public class CaptureResultController {
     private ResultController resultController;
     private DefaultLeagueService defaultLeagueService;
     private LoginView loginView;
-    private SubmitResultModel submitResultModel;
+    private ResultModel resultModel;
 
     @Autowired
-    public CaptureResultController(DefaultLeagueService defaultLeagueService, LoginView loginView, SubmitResultModel submitResultModel) {
+    public CaptureResultController(DefaultLeagueService defaultLeagueService, LoginView loginView, ResultModel resultModel) {
         this.defaultLeagueService = defaultLeagueService;
         this.loginView = loginView;
-        this.submitResultModel = submitResultModel;
+        this.resultModel = resultModel;
     }
 
     public void captureResults(LoginModel loginModel) {
@@ -33,15 +32,15 @@ public class CaptureResultController {
         if (loginModel.isEmpty()) {
             loginModel.setBasicAuth(getLoginDetails());
         }
-        submitResultModel.setResultModel(getResultDetails());
-        captureResult(loginModel, submitResultModel);
+        resultModel.setResult(getResultDetails());
+        captureResult(loginModel, resultModel);
     }
 
-    private void captureResult(LoginModel loginModel, SubmitResultModel submitResultModel) {
-        defaultLeagueService.submitResult(loginModel, submitResultModel);
+    private void captureResult(LoginModel loginModel, ResultModel resultModel) {
+        defaultLeagueService.submitResult(loginModel, resultModel);
     }
 
-    private ResultModel getResultDetails() {
+    private String getResultDetails() {
         resultController = new ResultController();
         return resultController.setResult();
     }
