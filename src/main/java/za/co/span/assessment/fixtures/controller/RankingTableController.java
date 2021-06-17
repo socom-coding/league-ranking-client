@@ -35,9 +35,7 @@ public class RankingTableController {
 
     private void displayRankingTable(LoginModel loginModel) {
         List<Team> teamList = getRankingTable(loginModel);
-        for (Team team : teamList) {
-            System.out.println(team.getPosition() + ". " + team.getName() + ", " + team.getPoints() + " pts");
-        }
+        teamList.forEach(team -> System.out.println(team.getPosition() + ". " + team.getName() + ", " + team.getPoints() + " pts"));
     }
 
     private String getLoginDetails() {
