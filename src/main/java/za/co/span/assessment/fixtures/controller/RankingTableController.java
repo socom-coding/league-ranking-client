@@ -1,12 +1,12 @@
 package za.co.span.assessment.fixtures.controller;
 
-import leaguerankingservice.consume.model.LeagueRanking;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.co.span.assessment.StartLeagueRankingClientApplication;
-import za.co.span.assessment.fixtures.model.SubmitResultModel;
+import za.co.span.assessment.fixtures.pojo.LoginModel;
+import za.co.span.assessment.fixtures.pojo.Team;
 import za.co.span.assessment.fixtures.service.DefaultLeagueService;
 import za.co.span.assessment.fixtures.view.LoginView;
 
@@ -26,25 +26,25 @@ public class RankingTableController {
         this.loginView = loginView;
     }
 
-    public void viewRanking(SubmitResultModel submitResultModel) {
-        if (submitResultModel.isEmpty()) {
-            getLoginDetails(submitResultModel);
+    public void viewRanking(LoginModel loginModel) {
+        if (loginModel.isEmpty()) {
+            loginModel.setBasicAuth(getLoginDetails());
         }
-        displayRankingTable(submitResultModel);
+        displayRankingTable(loginModel);
     }
 
-    private void displayRankingTable(SubmitResultModel submitResultModel) {
-        List<LeagueRanking> leagueRankings = getRankingTable(submitResultModel);
-        for (LeagueRanking leagueRanking : leagueRankings) {
-            System.out.println(leagueRanking.getPosition() + ". " + leagueRanking.getName() + ", " + leagueRanking.getPoints() + " pts");
+    private void displayRankingTable(LoginModel loginModel) {
+        List<Team> teamList = getRankingTable(loginModel);
+        for (Team team : teamList) {
+            System.out.println(team.getPosition() + ". " + team.getName() + ", " + team.getPoints() + " pts");
         }
     }
 
-    private void getLoginDetails(SubmitResultModel submitResultModel) {
-        submitResultModel.setLoginModel(loginView.setLogin());
+    private String getLoginDetails() {
+        return loginView.setLogin();
     }
 
-    private List<LeagueRanking> getRankingTable(SubmitResultModel submitResultModel) {
-        return defaultLeagueService.viewRankingTable(submitResultModel);
+    private List<Team> getRankingTable(LoginModel loginModel) {
+        return defaultLeagueService.viewRankingTable(loginModel);
     }
 }

@@ -3,7 +3,7 @@ package za.co.span.assessment.fixtures.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.span.assessment.StartLeagueRankingClientApplication;
-import za.co.span.assessment.fixtures.model.ResultModel;
+import za.co.span.assessment.fixtures.pojo.ResultModel;
 
 import java.util.Scanner;
 

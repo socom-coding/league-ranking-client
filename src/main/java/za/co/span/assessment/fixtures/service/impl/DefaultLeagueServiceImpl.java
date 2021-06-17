@@ -1,13 +1,15 @@
 package za.co.span.assessment.fixtures.service.impl;
 
 import leaguerankingservice.consume.api.DefaultFixturesControllerApi;
-import leaguerankingservice.consume.model.LeagueRanking;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import za.co.span.assessment.fixtures.model.SubmitResultModel;
+import za.co.span.assessment.fixtures.pojo.LoginModel;
+import za.co.span.assessment.fixtures.pojo.SubmitResultModel;
+import za.co.span.assessment.fixtures.pojo.Team;
 import za.co.span.assessment.fixtures.service.DefaultLeagueService;
+import za.co.span.assessment.fixtures.utils.mapper.TeamMapper;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -29,17 +31,19 @@ public class DefaultLeagueServiceImpl implements DefaultLeagueService {
 
     @Override
     public void submitResult(SubmitResultModel submitResultModel) {
-        setAuthorization(submitResultModel);
+        setAuthorization(submitResultModel.getLoginModel());
         defaultFixturesControllerApi.captureResultUsingPOST(submitResultModel.getResultModel().getResult());
     }
 
     @Override
-    public List<LeagueRanking> viewRankingTable(SubmitResultModel submitResultModel) {
-        setAuthorization(submitResultModel);
-        return defaultFixturesControllerApi.rankingUsingGET();
+    public List<Team> viewRankingTable(LoginModel loginModel) {
+        setAuthorization(loginModel);
+
+        List<Team> teamList = TeamMapper.INSTANCE.mapToPojo(defaultFixturesControllerApi.rankingUsingGET());
+        return teamList;
     }
 
-    private void setAuthorization(SubmitResultModel submitResultModel){
-        defaultFixturesControllerApi.getApiClient().addDefaultHeader("Authorization", "Basic " + submitResultModel.getLoginModel().getBasicAuth());
+    private void setAuthorization(LoginModel loginModel) {
+        defaultFixturesControllerApi.getApiClient().addDefaultHeader("Authorization", "Basic " + loginModel.getBasicAuth());
     }
 }

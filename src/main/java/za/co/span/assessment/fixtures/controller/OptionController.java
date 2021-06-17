@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.co.span.assessment.StartLeagueRankingClientApplication;
-import za.co.span.assessment.fixtures.model.SubmitResultModel;
+import za.co.span.assessment.fixtures.pojo.LoginModel;
 
 import java.util.Scanner;
 
@@ -23,7 +23,7 @@ public class OptionController {
         this.rankingTableController = rankingTableController;
     }
 
-    public Boolean processOption(SubmitResultModel submitResultModel) {
+    public Boolean processOption(LoginModel loginModel) {
         String option = null;
 
         Scanner scanner = new Scanner(System.in);
@@ -34,10 +34,10 @@ public class OptionController {
 
         switch (option) {
             case "1":
-                captureResultController.captureResults(submitResultModel);
+                captureResultController.captureResults(loginModel);
                 break;
             case "2":
-                rankingTableController.viewRanking(submitResultModel);
+                rankingTableController.viewRanking(loginModel);
                 break;
             case "3":
                 return Boolean.TRUE;

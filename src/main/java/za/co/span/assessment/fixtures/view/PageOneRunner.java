@@ -8,7 +8,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import za.co.span.assessment.StartLeagueRankingClientApplication;
 import za.co.span.assessment.fixtures.controller.OptionController;
-import za.co.span.assessment.fixtures.model.SubmitResultModel;
+import za.co.span.assessment.fixtures.pojo.LoginModel;
 
 @Component
 @Order(value = 1)
@@ -17,21 +17,21 @@ public class PageOneRunner implements CommandLineRunner {
     private static Logger LOG = LoggerFactory.getLogger(StartLeagueRankingClientApplication.class);
 
     private OptionController optionController;
-    private SubmitResultModel submitResultModel;
+    private LoginModel loginModel;
 
     boolean endProgramme = false;
 
     @Autowired
-    public PageOneRunner(OptionController optionController, SubmitResultModel submitResultModel) {
+    public PageOneRunner(OptionController optionController, LoginModel loginModel) {
         this.optionController = optionController;
-        this.submitResultModel = submitResultModel;
+        this.loginModel = loginModel;
     }
 
     @Override
     public void run(String... args) throws Exception {
         while (!endProgramme) {
             OptionsView.getOptions();
-            endProgramme = optionController.processOption(submitResultModel);
+            endProgramme = optionController.processOption(loginModel);
         }
     }
 }

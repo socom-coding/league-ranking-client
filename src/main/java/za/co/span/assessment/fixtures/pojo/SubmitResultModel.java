@@ -1,4 +1,4 @@
-package za.co.span.assessment.fixtures.model;
+package za.co.span.assessment.fixtures.pojo;
 
 import org.springframework.stereotype.Component;
 
@@ -21,12 +21,5 @@ public class SubmitResultModel {
 
     public void setResultModel(ResultModel resultModel) {
         this.resultModel = resultModel;
-    }
-
-    public boolean isEmpty() {
-        if (loginModel == null) {
-            return Boolean.TRUE;
-        }
-        return Boolean.FALSE;
     }
 }

@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import za.co.span.assessment.StartLeagueRankingClientApplication;
-import za.co.span.assessment.fixtures.model.LoginModel;
 import za.co.span.assessment.security.Base64CredentialEncoder;
 
 import java.util.Scanner;
@@ -19,7 +18,7 @@ public class LoginView {
         this.base64CredentialEncoder = base64CredentialEncoder;
     }
 
-    public LoginModel setLogin() {
+    public String setLogin() {
         Scanner scanner = new Scanner(System.in);
 
         String name = "";
@@ -34,8 +33,6 @@ public class LoginView {
         if (scanner.hasNext()) {
             password = scanner.nextLine();
         }
-
-        LoginModel loginModel = new LoginModel(base64CredentialEncoder.encodeUsernamePassword(name, password));
-        return loginModel;
+        return base64CredentialEncoder.encodeUsernamePassword(name, password);
     }
 }
