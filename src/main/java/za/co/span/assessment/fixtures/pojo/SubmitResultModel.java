@@ -4,16 +4,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SubmitResultModel {
-//    private LoginModel loginModel;
-    private ResultModel resultModel;
 
-//    public LoginModel getLoginModel() {
-//        return loginModel;
-//    }
-//
-//    public void setLoginModel(LoginModel loginModel) {
-//        this.loginModel = loginModel;
-//    }
+    private ResultModel resultModel;
 
     public ResultModel getResultModel() {
         return resultModel;
