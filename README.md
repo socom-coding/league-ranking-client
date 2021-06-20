@@ -2,6 +2,17 @@
 
 The league-ranking-client is a springboot console client that takes input from the user and calls the league-ranking-service api.
 
+    #SpringBoot Microservice
+    #Postman testing collection
+    #Postman DEV and QA environments
+
+    #NOTE: 
+    DEV - The "dev" profile  will run out of the box without any config changes or setup required. It uses an h2 embedded database with schema that runs at runtime. This will       only be available in the 'dev" env for development.
+
+    QA - "qa" profile requires a MySQL database and the inserted scripts needs to be ran to create the tables and the datasource config in the application-qa.properties need                to be changed where necesary.
+
+    PROD - "prod" profile requires prod environment setup and config to be made in the application-prod.properties file.
+
 The user will be asked to input login credentials to validate which function he/she may use.
 
     There are two users allowed to access these endpoints:
