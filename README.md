@@ -8,6 +8,11 @@ The league-ranking-client is a springboot console client that takes input from t
 
     #NOTE: 
     DEV - The "dev" profile  will run out of the box without any config changes or setup required. It uses an h2 embedded database with schema that runs at runtime. This will       only be available in the 'dev" env for development.
+    
+    To run from ide, you might have to add the springboot start application to the run configuration:
+        -Edit Configuration
+        -Main Class za.co.span.assessment.StartLeagueRankingClientApplication
+        -Active Profile dev or qa
 
     QA - "qa" profile requires a MySQL database and the inserted scripts needs to be ran to create the tables and the datasource config in the application-qa.properties need                to be changed where necesary.
 
