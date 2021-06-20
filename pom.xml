@@ -46,7 +46,7 @@
             <version>1.4.2.Final</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor -->
+        <!-- MAPSTRUCT -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
@@ -106,9 +106,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-<!--                            <inputSpec>${project.basedir}\src\main\resources\contract\yaml\league_ranking_default.yaml-->
                             <inputSpec>${project.basedir}\src\main\resources\contract\yaml\league_ranking_default_service.yaml
-<!--                            <inputSpec>${project.basedir}\src\main\resources\contract\consume\yaml\consume\league_ranking_default_service.yaml-->
                             </inputSpec>
                             <language>java</language>
                             <generateApiTests>false</generateApiTests>
