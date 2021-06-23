@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import za.co.span.assessment.StartLeagueRankingClientApplication;
 import za.co.span.assessment.fixtures.pojo.LoginModel;
 import za.co.span.assessment.fixtures.pojo.ResultModel;
-import za.co.span.assessment.fixtures.service.DefaultLeagueService;
+import za.co.span.assessment.fixtures.service.DefaultLeagueResultsService;
 import za.co.span.assessment.fixtures.view.LoginView;
 
 @Component
@@ -16,12 +16,12 @@ public class CaptureResultController {
     private static Logger LOG = LoggerFactory.getLogger(StartLeagueRankingClientApplication.class);
 
     private ResultController resultController;
-    private DefaultLeagueService defaultLeagueService;
+    private DefaultLeagueResultsService defaultLeagueService;
     private LoginView loginView;
     private ResultModel resultModel;
 
     @Autowired
-    public CaptureResultController(DefaultLeagueService defaultLeagueService, LoginView loginView, ResultModel resultModel) {
+    public CaptureResultController(DefaultLeagueResultsService defaultLeagueService, LoginView loginView, ResultModel resultModel) {
         this.defaultLeagueService = defaultLeagueService;
         this.loginView = loginView;
         this.resultModel = resultModel;

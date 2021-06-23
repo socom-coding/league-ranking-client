@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import za.co.span.assessment.StartLeagueRankingClientApplication;
 import za.co.span.assessment.fixtures.pojo.LoginModel;
 import za.co.span.assessment.fixtures.pojo.Team;
-import za.co.span.assessment.fixtures.service.DefaultLeagueService;
+import za.co.span.assessment.fixtures.service.impl.DefaultViewLeagueRankingTableService;
 import za.co.span.assessment.fixtures.view.LoginView;
 
 import java.util.List;
@@ -17,12 +17,12 @@ public class RankingTableController {
 
     private static Logger LOG = LoggerFactory.getLogger(StartLeagueRankingClientApplication.class);
 
-    private DefaultLeagueService defaultLeagueService;
+    private DefaultViewLeagueRankingTableService defaultViewLeagueRankingTableService;
     private LoginView loginView;
 
     @Autowired
-    public RankingTableController(DefaultLeagueService defaultLeagueService, LoginView loginView) {
-        this.defaultLeagueService = defaultLeagueService;
+    public RankingTableController(DefaultViewLeagueRankingTableService defaultViewLeagueRankingTableService, LoginView loginView) {
+        this.defaultViewLeagueRankingTableService = defaultViewLeagueRankingTableService;
         this.loginView = loginView;
     }
 
@@ -45,6 +45,6 @@ public class RankingTableController {
     }
 
     private List<Team> getRankingTable(LoginModel loginModel) {
-        return defaultLeagueService.viewRankingTable(loginModel);
+        return defaultViewLeagueRankingTableService.viewRankingTable(loginModel);
     }
 }

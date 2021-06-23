@@ -9,7 +9,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import za.co.span.assessment.fixtures.pojo.LoginModel;
 import za.co.span.assessment.fixtures.pojo.ResultModel;
 import za.co.span.assessment.fixtures.pojo.Team;
-import za.co.span.assessment.fixtures.service.DefaultLeagueService;
+import za.co.span.assessment.fixtures.service.DefaultLeagueResultsService;
 import za.co.span.assessment.fixtures.utils.mapper.InitializeLoginModel;
 import za.co.span.assessment.fixtures.utils.mapper.InitializeResultModel;
 import za.co.span.assessment.fixtures.utils.mapper.TeamMapper;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DefaultLeagueServiceImpl implements DefaultLeagueService {
+public class DefaultLeagueServiceImpl implements DefaultLeagueResultsService, DefaultViewLeagueRankingTableService {
     private static final Logger log = LoggerFactory.getLogger(DefaultLeagueServiceImpl.class);
 
     private DefaultFixturesControllerApi defaultFixturesControllerApi;

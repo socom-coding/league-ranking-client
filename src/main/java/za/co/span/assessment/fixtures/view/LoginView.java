@@ -2,6 +2,7 @@ package za.co.span.assessment.fixtures.view;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.co.span.assessment.StartLeagueRankingClientApplication;
 import za.co.span.assessment.security.Base64CredentialEncoder;
@@ -14,6 +15,7 @@ public class LoginView {
 
     private Base64CredentialEncoder base64CredentialEncoder;
 
+    @Autowired
     public LoginView(Base64CredentialEncoder base64CredentialEncoder) {
         this.base64CredentialEncoder = base64CredentialEncoder;
     }
