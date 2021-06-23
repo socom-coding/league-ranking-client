@@ -1,4 +1,4 @@
-package za.co.span.assessment.fixtures.utils.mapper;
+package za.co.span.assessment.fixtures.utils;
 
 import za.co.span.assessment.fixtures.pojo.LoginModel;
 

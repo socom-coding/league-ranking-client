@@ -16,13 +16,13 @@ public class CaptureResultController {
     private static Logger LOG = LoggerFactory.getLogger(StartLeagueRankingClientApplication.class);
 
     private ResultController resultController;
-    private DefaultLeagueResultsService defaultLeagueService;
+    private DefaultLeagueResultsService defaultLeagueResultsService;
     private LoginView loginView;
     private ResultModel resultModel;
 
     @Autowired
-    public CaptureResultController(DefaultLeagueResultsService defaultLeagueService, LoginView loginView, ResultModel resultModel) {
-        this.defaultLeagueService = defaultLeagueService;
+    public CaptureResultController(DefaultLeagueResultsService defaultLeagueResultsService, LoginView loginView, ResultModel resultModel) {
+        this.defaultLeagueResultsService = defaultLeagueResultsService;
         this.loginView = loginView;
         this.resultModel = resultModel;
     }
@@ -37,7 +37,7 @@ public class CaptureResultController {
     }
 
     private void captureResult(LoginModel loginModel, ResultModel resultModel) {
-        defaultLeagueService.submitResult(loginModel, resultModel);
+        defaultLeagueResultsService.submitResult(loginModel, resultModel);
     }
 
     private String getResultDetails() {
